@@ -45,31 +45,31 @@ const serverBase = function(){
         );
     }
     const end = function(res){
-        res.send(
+        res.writeHead(200);
+        res.write(
             JSON.stringify({
                  'result':'ok'
             })
         );
-        res.status(200);
         return res.end();
 
     }
     const notAllowedMethod = function(res){
-        res.send(
+        res.writeHead(405);
+        res.write(
             JSON.stringify({
                  'result':'Method Not Allowed'
             })
         );
-        res.status(405);
         return res.end();
     }
     const badRequest = function(res){
-        res.send(
+        res.writeHead(400);
+        res.write(
             JSON.stringify({
                  'result':'bad request'
             })
         );
-        res.status(400);
         return res.end();
     }
     const stop=function(){ 
