@@ -21,12 +21,12 @@ const serverBase = function(){
                  try{
                      post = JSON.parse(post);
                  }catch(e){
-                     return res.end();
+                     return badRequest(res);
                  }
                  if(req.url === '/')
                      return res.end();
                  if(req.method !== 'POST')
-                     return res.end();
+                     return notAllowedMethod(res);
                  const finnalData = (Buffer.from(JSON.stringify(
                      post
                  ))).toString('base64')
@@ -37,12 +37,40 @@ const serverBase = function(){
                      data      : finnalData,
                      size      : finnalData.length
                  });
-                 return res.end();
+                 return end(res);
             });
         }).listen(
             confrc.get("httpd").port,
             confrc.get("httpd").address
         );
+    }
+    const end = function(res){
+        res.send(
+            JSON.stringify({
+                 'result':'ok'
+            })
+        );
+        res.status(200);
+        return res.end();
+
+    }
+    const notAllowedMethod = function(res){
+        res.send(
+            JSON.stringify({
+                 'result':'Method Not Allowed'
+            })
+        );
+        res.status(405);
+        return res.end();
+    }
+    const badRequest = function(res){
+        res.send(
+            JSON.stringify({
+                 'result':'bad request'
+            })
+        );
+        res.status(400);
+        return res.end();
     }
     const stop=function(){ 
         http.close();
