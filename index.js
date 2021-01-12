@@ -30,10 +30,10 @@ const serverBase = function(){
                  const finnalData = (Buffer.from(JSON.stringify(
                      post
                  ))).toString('base64')
+                 const remote  = req.connection.remoteAddress;
+                 const headers = req.rawHeaders;
                  logrc.log({
                      name      : req.url,
-                     remote    : req.connection.remoteAddress,
-                     headers   : req.rawHeaders,
                      data      : finnalData,
                      size      : finnalData.length
                  });
