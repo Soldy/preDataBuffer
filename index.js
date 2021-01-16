@@ -1,3 +1,6 @@
+/*
+ *  @Soldy\preDataBuffer\2021.01.16\GPL3
+ */
 'use strict';
 const confrc = new (require('confrc')).confrc();
 const logrc = new (require('logrc')).logBase(
@@ -5,10 +8,17 @@ const logrc = new (require('logrc')).logBase(
     Math.round(Date.now()/1000).toString()+
     '.jlog'
 );
+const src = new (require('statusrc')).statusrc;
 const http = require('http');
 
-
+/*
+ * @prototype
+ */
 const serverBase = function(){
+    /*
+     *  @private
+     *  @return {integer}
+     */
     const start=function(){
         http.createServer(function (req, res) {
             let post = '';
@@ -19,12 +29,12 @@ const serverBase = function(){
                 try{
                     post = JSON.parse(post);
                 }catch(e){
-                    return badRequest(res);
+                    return src.badRequest(res);
                 }
                 if(req.url === '/')
-                    return res.end();
+                    return src.notExist(res);
                 if(req.method !== 'POST')
-                    return notAllowedMethod(res);
+                    return src.notAllowedMethod(res);
                 const finnalData = (Buffer.from(JSON.stringify(
                     post
                 ))).toString('base64');
@@ -35,46 +45,14 @@ const serverBase = function(){
                     data      : finnalData,
                     size      : finnalData.length
                 });
-                return end(res);
+                return src.ok(res);
             });
         }).listen(
             confrc.get('httpd').port,
             confrc.get('httpd').address
         );
     };
-    const end = function(res){
-        res.writeHead(200);
-        res.write(
-            JSON.stringify({
-                'result':'ok'
-            })
-        );
-        return res.end();
-
-    };
-    const notAllowedMethod = function(res){
-        res.writeHead(405);
-        res.write(
-            JSON.stringify({
-                'result':'Method Not Allowed'
-            })
-        );
-        return res.end();
-    };
-    const badRequest = function(res){
-        res.writeHead(400);
-        res.write(
-            JSON.stringify({
-                'result':'bad request'
-            })
-        );
-        return res.end();
-    };
-    const stop=function(){ 
-        http.close();
-    };
-    process.on('EXIT', stop);
-    process.on('SIGINT', stop);
+    // constructor
     start();
 };
 
