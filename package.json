@@ -1,6 +1,6 @@
 {
   "name": "pre-data-buffer",
-  "version": "0.0.1",
+  "version": "0.0.1-dev20210116",
   "description": "pre process data buffer for AI",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,9 @@
   "dependencies": {
     "confrc": "^1.0.0",
     "initrc": "^1.0.1-r2",
-    "logrc": "0.0.3",
     "interactiveConsole": "0.0.7-alpha0",
+    "logrc": "0.0.3",
+    "statusrc": "0.0.1-dev20210114-2",
     "temprc": "^0.9.9-alpha4"
   },
   "devDependencies": {
