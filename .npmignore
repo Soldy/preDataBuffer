@@ -46,6 +46,7 @@ test
 .next
 .nuxt
 dist
+.env.confrc.json
 .git
 .npmignore
 .gitignore
