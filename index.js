@@ -2,7 +2,7 @@
  *  @Soldy\preDataBuffer\2021.01.16\GPL3
  */
 'use strict';
-const confrc = new (require('confrc')).confrc();
+const confrc = require('confrc').confrc;
 const logrc = new (require('logrc')).logBase(
     confrc.get('output').path+'/'+
     Math.round(Date.now()/1000).toString()+

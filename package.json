@@ -1,6 +1,6 @@
 {
   "name": "pre-data-buffer",
-  "version": "0.0.1-dev20210116",
+  "version": "0.0.1-dev20210903",
   "description": "pre process data buffer for AI",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Soldy/preDataBuffer#readme",
   "dependencies": {
-    "confrc": "^1.0.0",
+    "confrc": "^1.0.3",
     "initrc": "^1.0.1-r2",
     "interactiveConsole": "0.0.7-alpha0",
     "logrc": "0.0.3",
