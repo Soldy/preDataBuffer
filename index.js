@@ -2,11 +2,10 @@
  *  @Soldy\preDataBuffer\2021.01.16\GPL3
  */
 'use strict';
-const confrc = require('confrc').confrc;
-const logrc = new (require('logrc')).logBase(
-    confrc.get('output').path+'/'+
-    Math.round(Date.now()/1000).toString()+
-    '.jlog'
+const confrc = require('confrc').base;
+const logrc = (require('logrc')).dated(
+    confrc.get('output').path,
+    confrc.get('output').file
 );
 const src = new (require('statusrc')).statusrc;
 const http = require('http');
@@ -38,8 +37,6 @@ const serverBase = function(){
                 const finnalData = (Buffer.from(JSON.stringify(
                     post
                 ))).toString('base64');
-                const remote  = req.connection.remoteAddress;
-                const headers = req.rawHeaders;
                 logrc.log({
                     name      : req.url,
                     data      : finnalData,
